@@ -1,0 +1,7 @@
+ufes\principal\DadoClima.class
+ufes\principal\Principal.class
+ufes\principal\EstacaoClimatica.class
+ufes\principal\EstatisticaClimaObserver.class
+ufes\principal\IPainel.class
+ufes\principal\MaximasMinimasObserver.class
+ufes\principal\PainelClimaObserver.class

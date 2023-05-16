@@ -7,7 +7,6 @@ public class MaximasMinimasObserver implements IPainel{
     public MaximasMinimasObserver() {
         dadosClima = new ArrayList();
     }
-    
     @Override
     public void atualizar(DadoClima dadoClima) {
         dadosClima.add(dadoClima);

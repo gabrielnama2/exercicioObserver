@@ -11,4 +11,5 @@
         <maven.compiler.target>11</maven.compiler.target>
         <exec.mainClass>ufes.principal.Principal</exec.mainClass>
     </properties>
+    <name>exercicioObserver</name>
 </project>

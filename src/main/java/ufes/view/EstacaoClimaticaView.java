@@ -51,7 +51,7 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         );
         jPanelGraficoMaxMinLayout.setVerticalGroup(
             jPanelGraficoMaxMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 308, Short.MAX_VALUE)
         );
 
         jLabelMaxMin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -71,11 +71,11 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         jInternalFrameMaxMinDadosClimaLayout.setVerticalGroup(
             jInternalFrameMaxMinDadosClimaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameMaxMinDadosClimaLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addComponent(jLabelMaxMin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanelGraficoMaxMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jDesktopPane1.setLayer(jInternalFrameMaxMinDadosClima, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -85,16 +85,16 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(643, 643, 643)
+                .addGap(46, 46, 46)
                 .addComponent(jInternalFrameMaxMinDadosClima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(361, 361, 361)
+                .addGap(31, 31, 31)
                 .addComponent(jInternalFrameMaxMinDadosClima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -105,7 +105,9 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 28, Short.MAX_VALUE))
         );
 
         pack();

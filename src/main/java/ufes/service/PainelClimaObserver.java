@@ -1,4 +1,5 @@
-package ufes.principal;
+package ufes.service;
+import ufes.model.DadoClima;
 import java.time.LocalDate;
 
 public class PainelClimaObserver implements IPainel{

@@ -1,6 +1,8 @@
-package ufes.principal;
+package ufes.model;
+import ufes.model.DadoClima;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import ufes.service.IPainel;
 
 public class EstacaoClimatica {
     private ArrayList<IPainel> paineis;

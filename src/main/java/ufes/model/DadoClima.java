@@ -1,4 +1,4 @@
-package ufes.principal;
+package ufes.model;
 import java.time.LocalDate;
 
 public class DadoClima {

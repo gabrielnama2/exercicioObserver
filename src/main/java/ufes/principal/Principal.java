@@ -1,4 +1,9 @@
 package ufes.principal;
+import ufes.service.IPainel;
+import ufes.service.PainelClimaObserver;
+import ufes.service.MaximasMinimasObserver;
+import ufes.service.EstatisticaClimaObserver;
+import ufes.model.EstacaoClimatica;
 import java.time.LocalDate;
 import ufes.principal.*;
 

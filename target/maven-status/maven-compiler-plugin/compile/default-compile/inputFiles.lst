@@ -1,7 +1,9 @@
-C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\mavenproject1\src\main\java\ufes\principal\DadoClima.java
-C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\mavenproject1\src\main\java\ufes\principal\IPainel.java
-C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\mavenproject1\src\main\java\ufes\principal\Principal.java
-C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\mavenproject1\src\main\java\ufes\principal\MaximasMinimasObserver.java
-C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\mavenproject1\src\main\java\ufes\principal\EstacaoClimatica.java
-C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\mavenproject1\src\main\java\ufes\principal\PainelClimaObserver.java
-C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\mavenproject1\src\main\java\ufes\principal\EstatisticaClimaObserver.java
+C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\src\main\java\ufes\service\IPainel.java
+C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\src\main\java\ufes\service\MaximasMinimasObserver.java
+C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\src\main\java\ufes\view\EstacaoClimaticaView.java
+C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\src\main\java\ufes\model\EstacaoClimatica.java
+C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\src\main\java\ufes\principal\Principal.java
+C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\src\main\java\ufes\service\EstatisticaClimaObserver.java
+C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\src\main\java\ufes\presenter\EstacaoClimaticaPresenter.java
+C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\src\main\java\ufes\service\PainelClimaObserver.java
+C:\Users\gabri\OneDrive\DOCUMENTOS\FACULDADE\Documentos\GitHub\exercicioObserver\src\main\java\ufes\model\DadoClima.java

@@ -1,7 +1,11 @@
-ufes\principal\DadoClima.class
+ufes\presenter\UltimaAtualizacaoClimaPresenter.class
+ufes\presenter\MaximasMinimasPresenter.class
 ufes\principal\Principal.class
-ufes\principal\EstacaoClimatica.class
-ufes\principal\EstatisticaClimaObserver.class
-ufes\principal\IPainel.class
-ufes\principal\MaximasMinimasObserver.class
-ufes\principal\PainelClimaObserver.class
+ufes\model\DadoClima.class
+ufes\service\LogOperacoesDadoClima.class
+ufes\presenter\ResultadoMaximasMinimasClima.class
+ufes\presenter\EstacaoClimaticaPrincipalPresenter.class
+ufes\presenter\EstatisticaClimaPresenter.class
+ufes\view\EstacaoClimaticaView.class
+ufes\presenter\IPainel.class
+ufes\presenter\ResultadoMediaClima.class

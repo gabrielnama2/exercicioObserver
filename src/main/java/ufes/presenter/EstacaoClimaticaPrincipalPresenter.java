@@ -5,28 +5,31 @@ import java.util.ArrayList;
 import ufes.model.DadoClima;
 import ufes.view.ConfiguracaoSistemaView;
 import ufes.view.EstacaoClimaticaView;
+import ufes.view.JanelaErroView;
 
 public class EstacaoClimaticaPrincipalPresenter {
     private EstacaoClimaticaView estacaoClimaticaView;
     private ConfiguracaoSistemaView telaLog;
+    private JanelaErroView janelaErro;
     private ArrayList<IPainel> paineis;
     private ArrayList<DadoClima> dadosClima;
     
     public EstacaoClimaticaPrincipalPresenter(){
         estacaoClimaticaView = new EstacaoClimaticaView();
         telaLog = new ConfiguracaoSistemaView();
+        janelaErro = new JanelaErroView();
         paineis = new ArrayList();
         dadosClima = new ArrayList();
         
-        //Listener para a tela de Log
+        /*Listener para a tela de Log*/
         estacaoClimaticaView.getjMenuLog().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fazerLog();
+                telaLog.setVisible(true);
             }
         });
 
-        //Listener para o botão salvar na tela de Log
+        /*Listener para o botão salvar na tela de Log*/
         telaLog.getjButtonSalvar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -38,9 +41,20 @@ public class EstacaoClimaticaPrincipalPresenter {
     }
     
     /*Salva em log as operações com os dados*/
-    public void fazerLog() {
-        telaLog.setVisible(true);
+    private void fazerLog() {
         //Instancia a classe de Log
+    }
+    
+    /*Operações com os dados de clima*/
+    public void incluirDadoClima(DadoClima dadoClima){
+        dadosClima.add(dadoClima);
+        //fazerLog();
+        atualizarMedicoes();
+    }
+    
+    public void removerDadoClima(){
+        //remove o dado
+        //fazerLog();
     }
     
     /*Operações com os painéis*/
@@ -52,20 +66,20 @@ public class EstacaoClimaticaPrincipalPresenter {
         paineis.add(painel);
     }
     
-    /*Operações com os dados de clima*/
-    public void incluirDadoClima(DadoClima dadoClima){
-        dadosClima.add(dadoClima);
-        atualizarMedicoes();
-    }
-    
-    public void removerDadoClima(){
-        
-    }
-    
     /*Operações internas*/
-    public void atualizarMedicoes(){
-        //DadoClima dadoClima = new DadoClima(temperatura, umidade, pressao, data);
-        notificarPaineis();
+    private void atualizarMedicoes(){
+        dadosClima.clear();
+        if (dadosClima.isEmpty()) {
+            String mensagem = "Nenhum dado climático disponível.";
+            janelaErro.exibirMensagemErro(mensagem);
+            throw new RuntimeException(mensagem);
+        }
+        try{
+            notificarPaineis();
+        }
+        catch (RuntimeException e) {
+            System.out.println("Ocorreu um erro: " + e.getMessage());
+        }
     }
     
     private void notificarPaineis(){

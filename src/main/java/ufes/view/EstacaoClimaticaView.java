@@ -1,7 +1,9 @@
 package ufes.view;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -14,7 +16,7 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         initComponents();
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setResizable(false);
-        this.setVisible(true);
+        this.setVisible(true);  
     }
     
     public void preencherDadosUltimaAtualizacao(String temperatura, String umidade, String pressao, String data) {
@@ -49,6 +51,11 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         // Atualize o painel
         jPanelGraficoMaxMin.revalidate();
         jPanelGraficoMaxMin.repaint();
+    }
+    
+    public void exibirMensagemExcecao(String mensagem) {
+        JOptionPane.showMessageDialog(null, "Erro: " + mensagem, "Mensagem de erro", WIDTH);
+        this.setVisible(true);
     }
     
     @SuppressWarnings("unchecked")

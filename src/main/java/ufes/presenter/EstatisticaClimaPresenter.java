@@ -1,5 +1,4 @@
 package ufes.presenter;
-import java.text.DecimalFormat;
 import ufes.model.DadoClima;
 import java.util.ArrayList;
 import ufes.view.EstacaoClimaticaView;
@@ -15,7 +14,11 @@ public class EstatisticaClimaPresenter implements IPainel{
     public void atualizar(ArrayList<DadoClima> dadosClima, EstacaoClimaticaView estacaoClimaticaView) {
         resultadoMedia = calcularMedia(dadosClima);
         //Atualiza a view com o novo dado
-        estacaoClimaticaView.preencherDadosMediaClima(String.valueOf(resultadoMedia.getTemperatura()), String.valueOf(resultadoMedia.getUmidade()), String.valueOf(resultadoMedia.getPressao()), String.valueOf(resultadoMedia.getNumRegistros()));
+        estacaoClimaticaView.preencherDadosMediaClima(
+                String.valueOf(resultadoMedia.getTemperatura()),
+                String.valueOf(resultadoMedia.getUmidade()),
+                String.valueOf(resultadoMedia.getPressao()),
+                String.valueOf(resultadoMedia.getNumRegistros()));
     }
     
     public ResultadoMediaClima calcularMedia(ArrayList<DadoClima> dadosClima){

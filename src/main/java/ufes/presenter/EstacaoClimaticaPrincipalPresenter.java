@@ -43,15 +43,19 @@ public class EstacaoClimaticaPrincipalPresenter {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // pegando dados dos panes
-                Double temperatura = Double.parseDouble(estacaoClimaticaView.getjTextPaneTemperaturaIncluir().getText());
-                Double umidade = Double.parseDouble(estacaoClimaticaView.getjTextPaneUmidade().getText());
-                Double pressao = Double.parseDouble(estacaoClimaticaView.getjTextPanePressao().getText());
+                System.out.println("TEMPERATURA: " + estacaoClimaticaView.getjTextPaneTemperaturaIncluir().getText());
+                double temperatura = Double.parseDouble(estacaoClimaticaView.getjTextPaneTemperaturaIncluir().getText());
+                double umidade = Double.parseDouble(estacaoClimaticaView.getjTextPaneUmidade().getText());
+                double pressao = Double.parseDouble(estacaoClimaticaView.getjTextPanePressao().getText());
+                
                 // pegando a data
-                String Data = estacaoClimaticaView.getjTextPaneData().getText();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate data = LocalDate.parse(Data, formatter);
+                //String Data = estacaoClimaticaView.getjTextPaneData().getText();
+                //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                //LocalDate data = LocalDate.parse(Data, formatter);
                 // incluindo dados do clima
-                DadoClima novoClima = new DadoClima(temperatura,umidade,pressao,data);
+                
+                DadoClima novoClima = new DadoClima(temperatura, umidade, pressao, LocalDate.now());
+                System.out.println("NOVO DADO: " + novoClima);
                 incluirDadoClima(novoClima);
             }
         });

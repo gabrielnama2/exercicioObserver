@@ -38,6 +38,14 @@ public class EstacaoClimaticaPrincipalPresenter {
                 telaLog.setVisible(false);
             }
         });
+        
+        /*Listener para fechar a mensagem de erro*/
+        janelaErro.getBtnFechar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                janelaErro.setVisible(false);
+            }
+        });
     }
     
     /*Salva em log as operações com os dados*/

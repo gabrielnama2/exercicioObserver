@@ -1,6 +1,7 @@
 package ufes.view;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GraphicsEnvironment;
 import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -14,6 +15,7 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
     
     public EstacaoClimaticaView() {
         initComponents();
+        centralizarTela();
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setResizable(false);
         this.setVisible(true);  
@@ -56,6 +58,21 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
     public void exibirMensagemExcecao(String mensagem) {
         JOptionPane.showMessageDialog(null, "Erro: " + mensagem, "Mensagem de erro", WIDTH);
         this.setVisible(true);
+    }
+    
+    private void centralizarTela(){
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        
+        //Obtém a posição central da tela
+        int screenWidth = ge.getCenterPoint().x;
+        int screenHeight = ge.getCenterPoint().y;
+        
+        //Calcula a posição central da janela
+        int janelaX = screenWidth - (this.getWidth()/2);
+        int janelaY = screenHeight - (this.getHeight()/2);
+        
+        //Define a posição na tela
+        setLocation(janelaX, janelaY);
     }
     
     @SuppressWarnings("unchecked")
@@ -105,19 +122,19 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         jLabelTemperatura.setText("Temperatura:");
 
         txtResultadoTemperatura.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtResultadoTemperatura.setText("TEMPERATURA");
+        txtResultadoTemperatura.setText("0");
 
         jLabelUmidade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelUmidade.setText("Umidade:");
 
         txtResultadoUmidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtResultadoUmidade.setText("UMIDADE");
+        txtResultadoUmidade.setText("0");
 
         jLabelPressao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelPressao.setText("Pressão:");
 
         txtResultadoPressao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtResultadoPressao.setText("PRESSÃO");
+        txtResultadoPressao.setText("0");
 
         jLabelData.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelData.setText("Data:");
@@ -190,25 +207,25 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         jLabelTemperaturaMedia.setText("Temperatura:");
 
         txtResultadoTemperaturaMedia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtResultadoTemperaturaMedia.setText("TEMPERATURA");
+        txtResultadoTemperaturaMedia.setText("0");
 
         jLabelUmidadeMedia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelUmidadeMedia.setText("Umidade:");
 
         txtResultadoUmidadeMedia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtResultadoUmidadeMedia.setText("UMIDADE");
+        txtResultadoUmidadeMedia.setText("0");
 
         jLabelPressaoMedia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelPressaoMedia.setText("Pressão:");
 
         txtResultadoPressaoMedia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtResultadoPressaoMedia.setText("PRESSÃO");
+        txtResultadoPressaoMedia.setText("0");
 
         jLabelNumRegistros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelNumRegistros.setText("Nº de registros:");
 
         txtResultadoNumRegistros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtResultadoNumRegistros.setText("REGISTROS");
+        txtResultadoNumRegistros.setText("0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -294,7 +311,7 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
 
         txtqtdRegistros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtqtdRegistros.setForeground(new java.awt.Color(255, 255, 255));
-        txtqtdRegistros.setText("99999");
+        txtqtdRegistros.setText("0");
 
         jLabelqtdRegistros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelqtdRegistros.setForeground(new java.awt.Color(255, 255, 255));

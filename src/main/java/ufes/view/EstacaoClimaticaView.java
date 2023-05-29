@@ -1,9 +1,14 @@
 package ufes.view;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JTable;
 import javax.swing.JTextPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -14,6 +19,7 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
     
     public EstacaoClimaticaView() {
         initComponents();
+        this.mudaEstiloTabela();
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setResizable(false);
         this.setVisible(true);
@@ -84,20 +90,25 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         jLabelqtdRegistros = new javax.swing.JLabel();
         jInternalFrameIncluir1 = new javax.swing.JInternalFrame();
         jPanel2 = new javax.swing.JPanel();
-        jLabelTemperatura1 = new javax.swing.JLabel();
-        jLabelUmidade1 = new javax.swing.JLabel();
-        jLabelPressao1 = new javax.swing.JLabel();
-        jLabelData1 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPaneTemperaturaIncluir = new javax.swing.JTextPane();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextPaneUmidade = new javax.swing.JTextPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPanePressao = new javax.swing.JTextPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPaneData = new javax.swing.JTextPane();
-        jButtonIncluirDadosDoTempo = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jButtonRemoverDados = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTableRegistros = new javax.swing.JTable();
+        jInternalFrameIncluir2 = new javax.swing.JInternalFrame();
+        jPanel3 = new javax.swing.JPanel();
+        jLabelTemperatura2 = new javax.swing.JLabel();
+        jLabelUmidade2 = new javax.swing.JLabel();
+        jLabelPressao2 = new javax.swing.JLabel();
+        jLabelData2 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextPaneTemperaturaIncluir1 = new javax.swing.JTextPane();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextPaneUmidade1 = new javax.swing.JTextPane();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextPanePressao1 = new javax.swing.JTextPane();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTextPaneData1 = new javax.swing.JTextPane();
+        jButtonIncluirDadosDoTempo1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
         jMenuLog = new javax.swing.JMenuItem();
@@ -311,92 +322,72 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         jLabelqtdRegistros.setForeground(new java.awt.Color(255, 255, 255));
         jLabelqtdRegistros.setText("Número de registros: ");
 
-        jInternalFrameIncluir1.setTitle("Incluir dados do tempo ");
+        jInternalFrameIncluir1.setTitle("Registros");
         jInternalFrameIncluir1.setVisible(true);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabelTemperatura1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelTemperatura1.setText("Temperatura:");
-
-        jLabelUmidade1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelUmidade1.setText("Umidade:");
-
-        jLabelPressao1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelPressao1.setText("Pressão:");
-
-        jLabelData1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelData1.setText("Data:");
-
-        jScrollPane3.setViewportView(jTextPaneTemperaturaIncluir);
-
-        jScrollPane4.setViewportView(jTextPaneUmidade);
-
-        jScrollPane1.setViewportView(jTextPanePressao);
-
-        jScrollPane2.setViewportView(jTextPaneData);
-
-        jButtonIncluirDadosDoTempo.setText("Incluir");
-        jButtonIncluirDadosDoTempo.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRemoverDados.setText("Remover");
+        jButtonRemoverDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIncluirDadosDoTempoActionPerformed(evt);
+                jButtonRemoverDadosActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("* dd/MM/yyyy");
+        jTableRegistros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Data", "Temperatura", "Umidade", "Pressão"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableRegistros.setColumnSelectionAllowed(true);
+        jTableRegistros.getTableHeader().setReorderingAllowed(false);
+        jScrollPane5.setViewportView(jTableRegistros);
+        jTableRegistros.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (jTableRegistros.getColumnModel().getColumnCount() > 0) {
+            jTableRegistros.getColumnModel().getColumn(0).setResizable(false);
+            jTableRegistros.getColumnModel().getColumn(1).setResizable(false);
+            jTableRegistros.getColumnModel().getColumn(2).setResizable(false);
+            jTableRegistros.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelUmidade1)
-                            .addComponent(jLabelData1)
-                            .addComponent(jLabelTemperatura1)
-                            .addComponent(jLabelPressao1))
-                        .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonIncluirDadosDoTempo, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane2))
-                .addContainerGap(60, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(193, Short.MAX_VALUE)
+                .addComponent(jButtonRemoverDados, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTemperatura1)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelUmidade1)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelPressao1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonIncluirDadosDoTempo))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabelData1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonRemoverDados)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jInternalFrameIncluir1Layout = new javax.swing.GroupLayout(jInternalFrameIncluir1.getContentPane());
@@ -407,8 +398,110 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         );
         jInternalFrameIncluir1Layout.setVerticalGroup(
             jInternalFrameIncluir1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrameIncluir1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameIncluir1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jInternalFrameIncluir2.setTitle("Incluir dados do tempo ");
+        jInternalFrameIncluir2.setVisible(true);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabelTemperatura2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelTemperatura2.setText("Temperatura:");
+
+        jLabelUmidade2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelUmidade2.setText("Umidade:");
+
+        jLabelPressao2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelPressao2.setText("Pressão:");
+
+        jLabelData2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelData2.setText("Data:");
+
+        jScrollPane6.setViewportView(jTextPaneTemperaturaIncluir1);
+
+        jScrollPane7.setViewportView(jTextPaneUmidade1);
+
+        jScrollPane8.setViewportView(jTextPanePressao1);
+
+        jScrollPane9.setViewportView(jTextPaneData1);
+
+        jButtonIncluirDadosDoTempo1.setText("Incluir");
+        jButtonIncluirDadosDoTempo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIncluirDadosDoTempo1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("* dd/MM/yyyy");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelUmidade2)
+                            .addComponent(jLabelData2)
+                            .addComponent(jLabelTemperatura2)
+                            .addComponent(jLabelPressao2))
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonIncluirDadosDoTempo1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jScrollPane7)
+                    .addComponent(jScrollPane8)
+                    .addComponent(jScrollPane9))
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelTemperatura2)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelUmidade2)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelPressao2)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonIncluirDadosDoTempo1))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabelData2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)))
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jInternalFrameIncluir2Layout = new javax.swing.GroupLayout(jInternalFrameIncluir2.getContentPane());
+        jInternalFrameIncluir2.getContentPane().setLayout(jInternalFrameIncluir2Layout);
+        jInternalFrameIncluir2Layout.setHorizontalGroup(
+            jInternalFrameIncluir2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jInternalFrameIncluir2Layout.setVerticalGroup(
+            jInternalFrameIncluir2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrameIncluir2Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -418,6 +511,7 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         jDesktopPane.setLayer(txtqtdRegistros, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane.setLayer(jLabelqtdRegistros, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane.setLayer(jInternalFrameIncluir1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane.setLayer(jInternalFrameIncluir2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPaneLayout = new javax.swing.GroupLayout(jDesktopPane);
         jDesktopPane.setLayout(jDesktopPaneLayout);
@@ -425,20 +519,28 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPaneLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jInternalFrameUltimaAtualizacaoClima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jInternalFrameIncluir1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jInternalFrameDadosMediaClima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jInternalFrameGraficoMaxMinDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(jInternalFrameUltimaAtualizacaoClima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPaneLayout.createSequentialGroup()
+                        .addComponent(jInternalFrameDadosMediaClima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addComponent(jInternalFrameGraficoMaxMinDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(50, Short.MAX_VALUE))
+                    .addGroup(jDesktopPaneLayout.createSequentialGroup()
+                        .addComponent(jInternalFrameIncluir1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelqtdRegistros)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtqtdRegistros)
                 .addGap(34, 34, 34))
+            .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jDesktopPaneLayout.createSequentialGroup()
+                    .addGap(37, 37, 37)
+                    .addComponent(jInternalFrameIncluir2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(913, Short.MAX_VALUE)))
         );
         jDesktopPaneLayout.setVerticalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -446,19 +548,24 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
                 .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jDesktopPaneLayout.createSequentialGroup()
                         .addGap(0, 86, Short.MAX_VALUE)
-                        .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jInternalFrameGraficoMaxMinDados, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jInternalFrameDadosMediaClima, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jInternalFrameGraficoMaxMinDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDesktopPaneLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jInternalFrameIncluir1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jInternalFrameUltimaAtualizacaoClima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jInternalFrameDadosMediaClima, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jInternalFrameUltimaAtualizacaoClima, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelqtdRegistros)
                     .addComponent(txtqtdRegistros))
                 .addGap(12, 12, 12))
+            .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jDesktopPaneLayout.createSequentialGroup()
+                    .addGap(43, 43, 43)
+                    .addComponent(jInternalFrameIncluir2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(205, Short.MAX_VALUE)))
         );
 
         jMenu.setText("Configurar");
@@ -495,56 +602,95 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuLogActionPerformed
 
-    private void jButtonIncluirDadosDoTempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirDadosDoTempoActionPerformed
+    private void jButtonRemoverDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverDadosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonIncluirDadosDoTempoActionPerformed
+    }//GEN-LAST:event_jButtonRemoverDadosActionPerformed
+
+    private void jButtonIncluirDadosDoTempo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirDadosDoTempo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonIncluirDadosDoTempo1ActionPerformed
 
     public JMenuItem getjMenuLog() {
         return jMenuLog;
     }
 
-    // GETS E SETS DO INCLUIR
+    // REGISTROS
+    public JTable getjTableRegistros() {
+        return jTableRegistros;
+    }
+    
+    private void mudaEstiloTabela() {
+        // cor do cabeçalho
+        JTableHeader header = this.getjTableRegistros().getTableHeader();
+        header.setBackground(Color.black);
+        header.setForeground(Color.white);
+        
+        // alinhamento do cabeçalho
+        ((DefaultTableCellRenderer)this.getjTableRegistros().getTableHeader()
+                .getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
+        
+        // alinhando as células
+        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+        leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+        this.getjTableRegistros().getColumnModel().getColumn(0).setCellRenderer(leftRenderer);
+        this.getjTableRegistros().getColumnModel().getColumn(1).setCellRenderer(leftRenderer);
+        this.getjTableRegistros().getColumnModel().getColumn(2).setCellRenderer(leftRenderer);
+        this.getjTableRegistros().getColumnModel().getColumn(3).setCellRenderer(leftRenderer);
+    }
+    
+    public JButton getjButtonRemoverDados() {
+        return jButtonRemoverDados;
+    }
+    
+    // FIM DO REGISTROS
+
+
+    
+
+    // INCLUIR
     public JButton getjButtonIncluirDadosDoTempo() {
-        return jButtonIncluirDadosDoTempo;
+        return jButtonIncluirDadosDoTempo1;
     }
 
     public JTextPane getjTextPaneData() {
-        return jTextPaneData;
+        return jTextPaneData1;
     }
 
     public JTextPane getjTextPanePressao() {
-        return jTextPanePressao;
+        return jTextPanePressao1;
     }
 
     public JTextPane getjTextPaneTemperaturaIncluir() {
-        return jTextPaneTemperaturaIncluir;
+        return jTextPaneTemperaturaIncluir1;
     }
 
     public JTextPane getjTextPaneUmidade() {
-        return jTextPaneUmidade;
+        return jTextPaneUmidade1;
     }
-    // FIM DO GETS E SETS DO INCLUIR
+    // INCLUIR
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonIncluirDadosDoTempo;
+    private javax.swing.JButton jButtonIncluirDadosDoTempo1;
+    private javax.swing.JButton jButtonRemoverDados;
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JInternalFrame jInternalFrameDadosMediaClima;
     private javax.swing.JInternalFrame jInternalFrameGraficoMaxMinDados;
     private javax.swing.JInternalFrame jInternalFrameIncluir1;
+    private javax.swing.JInternalFrame jInternalFrameIncluir2;
     private javax.swing.JInternalFrame jInternalFrameUltimaAtualizacaoClima;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelData;
-    private javax.swing.JLabel jLabelData1;
+    private javax.swing.JLabel jLabelData2;
     private javax.swing.JLabel jLabelNumRegistros;
     private javax.swing.JLabel jLabelPressao;
-    private javax.swing.JLabel jLabelPressao1;
+    private javax.swing.JLabel jLabelPressao2;
     private javax.swing.JLabel jLabelPressaoMedia;
     private javax.swing.JLabel jLabelTemperatura;
-    private javax.swing.JLabel jLabelTemperatura1;
+    private javax.swing.JLabel jLabelTemperatura2;
     private javax.swing.JLabel jLabelTemperaturaMedia;
     private javax.swing.JLabel jLabelUmidade;
-    private javax.swing.JLabel jLabelUmidade1;
+    private javax.swing.JLabel jLabelUmidade2;
     private javax.swing.JLabel jLabelUmidadeMedia;
     private javax.swing.JLabel jLabelqtdRegistros;
     private javax.swing.JMenu jMenu;
@@ -553,15 +699,18 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelGraficoMaxMin;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextPane jTextPaneData;
-    private javax.swing.JTextPane jTextPanePressao;
-    private javax.swing.JTextPane jTextPaneTemperaturaIncluir;
-    private javax.swing.JTextPane jTextPaneUmidade;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JTable jTableRegistros;
+    private javax.swing.JTextPane jTextPaneData1;
+    private javax.swing.JTextPane jTextPanePressao1;
+    private javax.swing.JTextPane jTextPaneTemperaturaIncluir1;
+    private javax.swing.JTextPane jTextPaneUmidade1;
     private javax.swing.JLabel txtResultadoData;
     private javax.swing.JLabel txtResultadoNumRegistros;
     private javax.swing.JLabel txtResultadoPressao;

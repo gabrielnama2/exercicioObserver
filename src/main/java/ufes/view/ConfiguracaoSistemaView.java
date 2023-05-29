@@ -85,6 +85,10 @@ public class ConfiguracaoSistemaView extends javax.swing.JFrame {
         return jComboBoxOpcoesLog;
     }
     
+    public String getLogEscolhido() {
+        return (String) jComboBoxOpcoesLog.getSelectedItem();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox<String> jComboBoxOpcoesLog;

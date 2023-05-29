@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import ufes.model.DadoClima;
 import ufes.view.ConfiguracaoSistemaView;
 import ufes.view.EstacaoClimaticaView;
@@ -42,23 +43,31 @@ public class EstacaoClimaticaPrincipalPresenter {
          estacaoClimaticaView.getjButtonIncluirDadosDoTempo().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // pegando dados dos panes
-                System.out.println("TEMPERATURA: " + estacaoClimaticaView.getjTextPaneTemperaturaIncluir().getText());
-                double temperatura = Double.parseDouble(estacaoClimaticaView.getjTextPaneTemperaturaIncluir().getText());
-                double umidade = Double.parseDouble(estacaoClimaticaView.getjTextPaneUmidade().getText());
-                double pressao = Double.parseDouble(estacaoClimaticaView.getjTextPanePressao().getText());
-                
-                // pegando a data
-                //String Data = estacaoClimaticaView.getjTextPaneData().getText();
-                //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                //LocalDate data = LocalDate.parse(Data, formatter);
-                // incluindo dados do clima
-                
-                DadoClima novoClima = new DadoClima(temperatura, umidade, pressao, LocalDate.now());
-                System.out.println("NOVO DADO: " + novoClima);
-                incluirDadoClima(novoClima);
+                cadastrarClima();
             }
         });
+    }
+    
+    public void cadastrarClima() {
+        try {
+            // pegando dados dos jTextPane
+            double temperatura = Double.parseDouble(estacaoClimaticaView.getjTextPaneTemperaturaIncluir().getText());
+            double umidade = Double.parseDouble(estacaoClimaticaView.getjTextPaneUmidade().getText());
+            double pressao = Double.parseDouble(estacaoClimaticaView.getjTextPanePressao().getText());
+
+            // pegando a data e colocando no formato LocalDate
+            String Data = estacaoClimaticaView.getjTextPaneData().getText();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate data = LocalDate.parse(Data, formatter);
+            // incluindo dados do clima
+
+            DadoClima novoClima = new DadoClima(temperatura, umidade, pressao, data);
+            System.out.println("NOVO DADO: " + novoClima);
+            incluirDadoClima(novoClima);
+        }  catch (Exception e) {
+            System.out.println("Não foi possível gerar os dados do clima. Confira se a data está no formado dia/mês/ano e tente novamente!: " + e);
+            JOptionPane.showMessageDialog(null, "Não foi possível gerar os dados do clima. Confira se a data está no formado dia/mês/ano e tente novamente!: " + e);
+        }
     }
     
     /*Salva em log as operações com os dados*/

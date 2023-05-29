@@ -29,6 +29,5 @@ public class Principal {
         estacaoClimatica.incluirDadoClima(new DadoClima(25.6f, 46f, 43.8f, LocalDate.of(2023, 5, 22)));
         estacaoClimatica.incluirDadoClima(new DadoClima(27.1f, 41f, 42.3f, LocalDate.of(2023, 5, 23)));
         estacaoClimatica.incluirDadoClima(new DadoClima(24.0f, 40f, 45.5f, LocalDate.now()));
-
     }
 }

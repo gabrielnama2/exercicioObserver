@@ -1,6 +1,8 @@
 package ufes.presenter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import ufes.model.DadoClima;
 import ufes.view.ConfiguracaoSistemaView;
@@ -33,6 +35,24 @@ public class EstacaoClimaticaPrincipalPresenter {
                 System.out.println("LOG: " + telaLog.getjComboBoxOpcoesLog().getSelectedItem());    //Opção selecionada na tela de log
                 //Chama a classe que realiza o log passando a opção selecionada
                 telaLog.setVisible(false);
+            }
+        });
+        
+        // Listener para o botão de incluir dados
+         estacaoClimaticaView.getjButtonIncluirDadosDoTempo().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // pegando dados dos panes
+                Double temperatura = Double.parseDouble(estacaoClimaticaView.getjTextPaneTemperaturaIncluir().getText());
+                Double umidade = Double.parseDouble(estacaoClimaticaView.getjTextPaneUmidade().getText());
+                Double pressao = Double.parseDouble(estacaoClimaticaView.getjTextPanePressao().getText());
+                // pegando a data
+                String Data = estacaoClimaticaView.getjTextPaneData().getText();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate data = LocalDate.parse(Data, formatter);
+                // incluindo dados do clima
+                DadoClima novoClima = new DadoClima(temperatura,umidade,pressao,data);
+                incluirDadoClima(novoClima);
             }
         });
     }

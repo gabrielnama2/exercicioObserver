@@ -76,7 +76,7 @@ public class EstacaoClimaticaPrincipalPresenter {
     
     /*Operações internas*/
     private void atualizarMedicoes(){
-        dadosClima.clear();
+        //dadosClima.clear();
         if (dadosClima.isEmpty()) {
             String mensagem = "Nenhum dado climático disponível.";
             janelaErro.exibirMensagemErro(mensagem);

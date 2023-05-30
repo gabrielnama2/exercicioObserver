@@ -1,4 +1,5 @@
 package ufes.view;
+import java.awt.GraphicsEnvironment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
@@ -10,6 +11,7 @@ public class ConfiguracaoSistemaView extends javax.swing.JFrame {
 
     public ConfiguracaoSistemaView() {
         initComponents();
+        centralizarTela();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setResizable(false);
     }
@@ -51,12 +53,14 @@ public class ConfiguracaoSistemaView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonSalvar)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonSalvar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelLog)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxOpcoesLog, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(jComboBoxOpcoesLog, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,6 +87,21 @@ public class ConfiguracaoSistemaView extends javax.swing.JFrame {
 
     public JComboBox<String> getjComboBoxOpcoesLog() {
         return jComboBoxOpcoesLog;
+    }
+    
+    private void centralizarTela(){
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        
+        //Obtém a posição central da tela
+        int screenWidth = ge.getCenterPoint().x;
+        int screenHeight = ge.getCenterPoint().y;
+        
+        //Calcula a posição central da janela
+        int janelaX = screenWidth - (this.getWidth()/2);
+        int janelaY = screenHeight - (this.getHeight()/2);
+        
+        //Define a posição na tela
+        setLocation(janelaX, janelaY);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

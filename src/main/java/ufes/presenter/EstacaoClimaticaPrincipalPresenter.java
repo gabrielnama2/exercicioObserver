@@ -38,6 +38,14 @@ public class EstacaoClimaticaPrincipalPresenter {
                 telaLog.setVisible(false);
             }
         });
+        
+        /*Listener para fechar a mensagem de erro*/
+        janelaErro.getBtnFechar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                janelaErro.setVisible(false);
+            }
+        });
     }
     
     /*Salva em log as operações com os dados*/
@@ -68,7 +76,7 @@ public class EstacaoClimaticaPrincipalPresenter {
     
     /*Operações internas*/
     private void atualizarMedicoes(){
-        dadosClima.clear();
+        //dadosClima.clear();
         if (dadosClima.isEmpty()) {
             String mensagem = "Nenhum dado climático disponível.";
             janelaErro.exibirMensagemErro(mensagem);

@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -12,17 +13,14 @@ import ufes.adapter.Log;
 import ufes.model.DadoClima;
 import ufes.view.ConfiguracaoSistemaView;
 import ufes.view.EstacaoClimaticaView;
-import ufes.view.JanelaErroView;
 
 public class EstacaoClimaticaPrincipalPresenter {
     private EstacaoClimaticaView estacaoClimaticaView;
     private ArrayList<IPainel> paineis;
     private ArrayList<DadoClima> dadosClima;
-    private Log log;
     private ConfiguracaoSistemaView telaLog;
-    private JanelaErroView janelaErro;
-
-    private int linhaSelecionada_Registros; // linha selecionada na tabela de registros
+    private Log log;
+    private int linhaSelecionada_Registros; // Linha selecionada na tabela de registros
     
     public EstacaoClimaticaPrincipalPresenter(){
         estacaoClimaticaView = new EstacaoClimaticaView();
@@ -31,25 +29,23 @@ public class EstacaoClimaticaPrincipalPresenter {
         dadosClima = new ArrayList();
         log = new Log("JSON");
         
-        //Listener para a tela de Log
+        /*Listener para abrir a tela de Log*/
         estacaoClimaticaView.getjMenuLog().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                telaLog.setVisible(true);
+            }
+        });
+        
+        /*Listener para a configuração de Log*/
+        telaLog.getjButtonSalvar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 configuraLog();
             }
         });
-
-        /*Listener para o botão salvar na tela de Log*/
-        telaLog.getjButtonSalvar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("LOG: " + telaLog.getjComboBoxOpcoesLog().getSelectedItem());    //Opção selecionada na tela de log
-                //Chama a classe que realiza o log passando a opção selecionada
-                telaLog.setVisible(false);
-            }
-        });
         
-        // Listener para o botão de incluir dados
+        /*Listener para o botão de incluir dados*/
         estacaoClimaticaView.getjButtonIncluirDadosDoTempo().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -57,7 +53,7 @@ public class EstacaoClimaticaPrincipalPresenter {
             }
         });
         
-        // listener para ver qual linha foi selecionada na tabela de registros
+        /*Listener para ver qual linha foi selecionada na tabela de registros*/
         estacaoClimaticaView.getjTableRegistros().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -67,34 +63,87 @@ public class EstacaoClimaticaPrincipalPresenter {
             }
         });
 
-        // listener para quando o usuário apernou no botão de remover registro
+        /*Listener para quando o usuário apernou no botão de remover registro*/
         estacaoClimaticaView.getjButtonRemoverDados().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 removerDadoClima();
             }
-        });
-        
+        }); 
     }
     
-    // action para quado o usuário clica em "incluir" clima
+    /*MÉTODOS*/
+    
+    /*Operações com os painéis*/
+    public void registrarPainel(IPainel painel){
+        paineis.add(painel);
+    }
+    
+    public void removerPainel(IPainel painel){
+        paineis.add(painel);
+    }
+    
+    /*Operações com os dados de clima*/
     public void cadastrarClima() {
         try {
-            // pegando dados dos jTextPane
+            // Pegando dados dos jTextPane
             double temperatura = Double.parseDouble(estacaoClimaticaView.getjTextPaneTemperaturaIncluir().getText());
             double umidade = Double.parseDouble(estacaoClimaticaView.getjTextPaneUmidade().getText());
             double pressao = Double.parseDouble(estacaoClimaticaView.getjTextPanePressao().getText());
-            // pegando a data e colocando no formato LocalDate
-            String Data = estacaoClimaticaView.getjTextPaneData().getText();
+
+            // Converte a String da tela principal view em LocalDate
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate data = LocalDate.parse(Data, formatter);
-            // incluindo dados do clima
+            LocalDate data = LocalDate.parse(estacaoClimaticaView.getjTextPaneData().getText(), formatter);
+
+            // Incluindo dados do clima
             DadoClima novoClima = new DadoClima(temperatura, umidade, pressao, data);
-            System.out.println("NOVO DADO: " + novoClima);
             incluirDadoClima(novoClima);
-        }  catch (Exception e) {
-            System.out.println("Não foi possível gerar os dados do clima. Confira se a data está no formado dia/mês/ano e tente novamente!: " + e);
-            JOptionPane.showMessageDialog(null, "Não foi possível gerar os dados do clima. Confira se a data está no formado dia/mês/ano e tente novamente!: " + e);
+            
+        } 
+        catch (NumberFormatException e) {
+            System.out.println("Erro ao converter um valor numérico: " + e);
+            JOptionPane.showMessageDialog(null, "Verifique se os campos de temperatura, umidade e pressão contêm valores válidos.");
+        } 
+        catch (DateTimeParseException e) {
+            System.out.println("Erro ao fazer o parsing da data: " + e);
+            JOptionPane.showMessageDialog(null, "Verifique se a data está no formato correto (DD/MM/AAAA).");
+        }
+    }
+    
+    public void incluirDadoClima(DadoClima dadoClima){
+        log.getLog().escrever("Incluir", dadoClima.toString());
+        dadosClima.add(dadoClima);
+        atualizarMedicoes();
+        atualizaTabelaRegistros();
+    }
+    
+    // Remover clima pela tela principal view
+    public void removerDadoClima(){
+        log.getLog().escrever("Remover", dadosClima.get(linhaSelecionada_Registros).toString());
+        dadosClima.remove(linhaSelecionada_Registros);
+        atualizarMedicoes();
+        atualizaTabelaRegistros();
+    }
+    
+    /*Operações internas*/
+    private void atualizarMedicoes(){
+        //dadosClima.clear();
+        if (dadosClima.isEmpty()) {
+            System.out.println("Nenhum dado climático disponível.");
+            JOptionPane.showMessageDialog(null, "Nenhum dado climático disponível.");
+            estacaoClimaticaView.limparTela();
+        }
+        try{
+            notificarPaineis();
+        }
+        catch (RuntimeException e) {
+            System.out.println("Ocorreu algum erro: " + e);
+        }
+    }
+    
+    private void notificarPaineis(){
+        for(int i=0; i<paineis.size(); i++){
+            paineis.get(i).atualizar(dadosClima, estacaoClimaticaView);
         }
     }
     
@@ -123,54 +172,10 @@ public class EstacaoClimaticaPrincipalPresenter {
         }
     }
     
-    /*Salva em log as operações com os dados*/
+    //Configura o tipo de arquivo para o Log (JSON ou XML)
     public void configuraLog() {
-        telaLog.setVisible(true);
-        //Instancia a classe de Log
-    }
-    
-    /*Operações com os painéis*/
-    public void registrarPainel(IPainel painel){
-        paineis.add(painel);
-    }
-    
-    public void removerPainel(IPainel painel){
-        paineis.add(painel);
-    }
-    
-    /*Operações com os dados de clima*/
-    public void incluirDadoClima(DadoClima dadoClima){
-        log.getLog().escrever("Incluir", dadoClima.toString());
-        dadosClima.add(dadoClima);
-        atualizarMedicoes();
-    }
-    
-    // clicou em remover dados
-    public void removerDadoClima(){
-        log.getLog().escrever("Remover", dadosClima.get(linhaSelecionada_Registros).toString());
-        dadosClima.remove(linhaSelecionada_Registros);
-        atualizarMedicoes();
-    }
-    
-    /*Operações internas*/
-    private void atualizarMedicoes(){
-        //dadosClima.clear();
-        if (dadosClima.isEmpty()) {
-            String mensagem = "Nenhum dado climático disponível.";
-            janelaErro.exibirMensagemErro(mensagem);
-            throw new RuntimeException(mensagem);
-        }
-        try{
-            notificarPaineis();
-        }
-        catch (RuntimeException e) {
-            System.out.println("Ocorreu um erro: " + e.getMessage());
-        }
-    }
-    
-    private void notificarPaineis(){
-        for(int i=0; i<paineis.size(); i++){
-            paineis.get(i).atualizar(dadosClima, estacaoClimaticaView);
-        }
+        String configuracao = (String) telaLog.getjComboBoxOpcoesLog().getSelectedItem();
+        log = new Log(configuracao);
+        telaLog.setVisible(false);
     }
 }

@@ -44,6 +44,11 @@ public class ConfiguracaoSistemaView extends javax.swing.JFrame {
 
         jComboBoxOpcoesLog.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jComboBoxOpcoesLog.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JSON", "XML" }));
+        jComboBoxOpcoesLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxOpcoesLogActionPerformed(evt);
+            }
+        });
 
         jLabelLog.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelLog.setText("Log: ");
@@ -86,8 +91,12 @@ public class ConfiguracaoSistemaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jComboBoxOpcoesLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOpcoesLogActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxOpcoesLogActionPerformed
 
     public JButton getjButtonSalvar() {
         return jButtonSalvar;

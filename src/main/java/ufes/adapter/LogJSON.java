@@ -14,7 +14,7 @@ import ufes.adapter.ILog;
  */
 public class LogJSON implements ILog {
 
-    private String path = Paths.get(System.getProperty("user.dir")).toString();    
+    private String path = Paths.get(System.getProperty("user.dir"), "src", "main", "java", "ufes", "log").toString();
     private String file = "/LogJSON.json";
 
     @Override

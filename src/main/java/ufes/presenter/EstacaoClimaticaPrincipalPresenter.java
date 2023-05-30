@@ -33,7 +33,7 @@ public class EstacaoClimaticaPrincipalPresenter {
         estacaoClimaticaView.getjMenuLog().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fazerLog();
+                configLog();
             }
         });
 
@@ -120,7 +120,7 @@ public class EstacaoClimaticaPrincipalPresenter {
     }
     
     /*Salva em log as operações com os dados*/
-    public void fazerLog() {
+    public void configLog() {
         telaLog.setVisible(true);
         //Instancia a classe de Log
     }

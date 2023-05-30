@@ -1,5 +1,6 @@
 package ufes.presenter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import ufes.model.DadoClima;
 import java.util.ArrayList;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -10,15 +11,21 @@ public class MaximasMinimasPresenter implements IPainel {
     private DefaultCategoryDataset dadosGrafico;
 
     public MaximasMinimasPresenter() {
-
+        resultadosMaxMin = new ArrayList();
     }
 
     @Override
     public void atualizar(ArrayList<DadoClima> dadosClima, EstacaoClimaticaView estacaoClimaticaView) {
         resultadosMaxMin = calcularMaximasMinimas(dadosClima);
-        dadosGrafico = montarDadosGrafico(resultadosMaxMin);
-        // Atualiza a view com os novos dados para o gráfico
-        estacaoClimaticaView.exibirGrafico(dadosGrafico);
+        //Exibe o gráfico vazio
+        if(resultadosMaxMin.isEmpty()){
+            estacaoClimaticaView.exibirGraficoVazio();
+        }
+        else{
+            // Atualiza a view com os novos dados para o gráfico
+            dadosGrafico = montarDadosGrafico(resultadosMaxMin);
+            estacaoClimaticaView.exibirGrafico(dadosGrafico);
+        }
     }
 
     public ArrayList<ResultadoMaximasMinimasClima> calcularMaximasMinimas(ArrayList<DadoClima> dadosClima) {
@@ -75,7 +82,13 @@ public class MaximasMinimasPresenter implements IPainel {
         return resultados;
     }
 
-
+    public String formatarData(LocalDate data){
+        //Formata a data para o padrão brasileiro
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dataFormatada = data.format(formatter);
+        return dataFormatada;
+    }
+    
     private DefaultCategoryDataset montarDadosGrafico(ArrayList<ResultadoMaximasMinimasClima> resultados) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -83,18 +96,17 @@ public class MaximasMinimasPresenter implements IPainel {
             String tipoDadoClima = resultado.getTipoDadoClima();
             String tipoInformacao = resultado.getTipoInformacao();
             double valor = resultado.getValor();
-            String data = String.valueOf(resultado.getData());
+            
+            //Formata a data para o padrão brasileiro
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String dataFormatada = resultado.getData().format(formatter);
 
             if (tipoInformacao.equals("Máximo")) {
-                dataset.addValue(valor, tipoDadoClima + " máxima: " + data, tipoDadoClima);
-                //dataset.addValue(valor, data, tipoDadoClima);
+                dataset.addValue(valor, tipoDadoClima + " máxima: " + dataFormatada, tipoDadoClima);
             } else if (tipoInformacao.equals("Mínimo")) {
-                //dataset.addValue(valor, chaveMinimo, data + " (Mínimo)");
-                dataset.addValue(valor, tipoDadoClima + " mínima: " + data, tipoDadoClima);
+                dataset.addValue(valor, tipoDadoClima + " mínima: " + dataFormatada, tipoDadoClima);
             }
         }
-
         return dataset;
     }
-
 }

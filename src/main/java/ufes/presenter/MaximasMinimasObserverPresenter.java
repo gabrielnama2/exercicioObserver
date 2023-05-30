@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import org.jfree.data.category.DefaultCategoryDataset;
 import ufes.view.EstacaoClimaticaView;
 
-public class MaximasMinimasPresenter implements IPainel {
+public class MaximasMinimasObserverPresenter implements IPainel {
     private ArrayList<ResultadoMaximasMinimasClima> resultadosMaxMin;
     private DefaultCategoryDataset dadosGrafico;
 
-    public MaximasMinimasPresenter() {
+    public MaximasMinimasObserverPresenter() {
 
     }
 
@@ -88,7 +88,8 @@ public class MaximasMinimasPresenter implements IPainel {
             if (tipoInformacao.equals("Máximo")) {
                 dataset.addValue(valor, tipoDadoClima + " máxima: " + data, tipoDadoClima);
                 //dataset.addValue(valor, data, tipoDadoClima);
-            } else if (tipoInformacao.equals("Mínimo")) {
+            } 
+            else if (tipoInformacao.equals("Mínimo")) {
                 //dataset.addValue(valor, chaveMinimo, data + " (Mínimo)");
                 dataset.addValue(valor, tipoDadoClima + " mínima: " + data, tipoDadoClima);
             }

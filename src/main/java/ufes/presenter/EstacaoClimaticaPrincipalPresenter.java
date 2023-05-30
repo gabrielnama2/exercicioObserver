@@ -12,19 +12,22 @@ import ufes.adapter.Log;
 import ufes.model.DadoClima;
 import ufes.view.ConfiguracaoSistemaView;
 import ufes.view.EstacaoClimaticaView;
+import ufes.view.JanelaErroView;
 
 public class EstacaoClimaticaPrincipalPresenter {
     private EstacaoClimaticaView estacaoClimaticaView;
     private ArrayList<IPainel> paineis;
     private ArrayList<DadoClima> dadosClima;
-    private Log log;
     private ConfiguracaoSistemaView telaLog;
-
+    private JanelaErroView janelaErro;
+    private Log log;
+    
     private int linhaSelecionada_Registros; // linha selecionada na tabela de registros
     
     public EstacaoClimaticaPrincipalPresenter(){
         estacaoClimaticaView = new EstacaoClimaticaView();
         telaLog = new ConfiguracaoSistemaView();
+        janelaErro = new JanelaErroView();
         paineis = new ArrayList();
         dadosClima = new ArrayList();
         log = new Log("JSON");
@@ -43,6 +46,14 @@ public class EstacaoClimaticaPrincipalPresenter {
             public void actionPerformed(ActionEvent e) {
                 log = new Log((String) telaLog.getjComboBoxOpcoesLog().getSelectedItem());
                 telaLog.setVisible(false);
+            }
+        });
+        
+        /*Listener para fechar a mensagem de erro*/
+        janelaErro.getBtnFechar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                janelaErro.setVisible(false);
             }
         });
         
@@ -86,7 +97,6 @@ public class EstacaoClimaticaPrincipalPresenter {
             LocalDate data = LocalDate.parse(Data, formatter);
             // incluindo dados do clima
             DadoClima novoClima = new DadoClima(temperatura, umidade, pressao, data);
-            System.out.println("NOVO DADO: " + novoClima);
             incluirDadoClima(novoClima);
         }  catch (Exception e) {
             System.out.println("Não foi possível gerar os dados do clima. Confira se a data está no formado dia/mês/ano e tente novamente!: " + e);
@@ -149,9 +159,19 @@ public class EstacaoClimaticaPrincipalPresenter {
     }
     
     /*Operações internas*/
-    public void atualizarMedicoes(){
-        atualizaTabelaRegistros();
-        notificarPaineis();
+    private void atualizarMedicoes() {
+        //dadosClima.clear();
+        if (dadosClima.isEmpty()) {
+            String mensagem = "Nenhum dado climático disponível.";
+            janelaErro.exibirMensagemErro(mensagem);
+            throw new RuntimeException(mensagem);
+        }
+        try {
+            notificarPaineis();
+        } catch (RuntimeException e) {
+            System.out.println("Ocorreu um erro: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao abrir os dados: " + e);
+        }
     }
     
     private void notificarPaineis(){

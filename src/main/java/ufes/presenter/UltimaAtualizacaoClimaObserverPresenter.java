@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import ufes.view.EstacaoClimaticaView;
 
-public class UltimaAtualizacaoClimaPresenter implements IPainel {
+public class UltimaAtualizacaoClimaObserverPresenter implements IPainel {
 
     private DadoClima resultadoUltimaAtualizacao;
 

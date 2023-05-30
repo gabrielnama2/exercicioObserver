@@ -4,10 +4,10 @@ import ufes.model.DadoClima;
 import java.util.ArrayList;
 import ufes.view.EstacaoClimaticaView;
 
-public class EstatisticaClimaPresenter implements IPainel{
+public class EstatisticaClimaObserverPresenter implements IPainel{
     private ResultadoMediaClima resultadoMedia;
     
-    public EstatisticaClimaPresenter() {
+    public EstatisticaClimaObserverPresenter() {
         
     }
     

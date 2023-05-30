@@ -2,18 +2,18 @@ package ufes.principal;
 import java.time.LocalDate;
 import ufes.model.DadoClima;
 import ufes.presenter.EstacaoClimaticaPrincipalPresenter;
-import ufes.presenter.EstatisticaClimaPresenter;
+import ufes.presenter.EstatisticaClimaObserverPresenter;
 import ufes.presenter.IPainel;
-import ufes.presenter.MaximasMinimasPresenter;
-import ufes.presenter.UltimaAtualizacaoClimaPresenter;
+import ufes.presenter.MaximasMinimasObserverPresenter;
+import ufes.presenter.UltimaAtualizacaoClimaObserverPresenter;
 
 public class Principal {
     public static void main(String args[]){
         EstacaoClimaticaPrincipalPresenter estacaoClimatica = new EstacaoClimaticaPrincipalPresenter();
         
-        IPainel ultimoDadoClimaPainel = new UltimaAtualizacaoClimaPresenter();
-        IPainel estatisticaClimaPainel = new EstatisticaClimaPresenter();
-        IPainel maximaMinimasPainel = new MaximasMinimasPresenter();
+        IPainel ultimoDadoClimaPainel = new UltimaAtualizacaoClimaObserverPresenter();
+        IPainel estatisticaClimaPainel = new EstatisticaClimaObserverPresenter();
+        IPainel maximaMinimasPainel = new MaximasMinimasObserverPresenter();
 
         estacaoClimatica.registrarPainel(ultimoDadoClimaPainel);
         estacaoClimatica.registrarPainel(estatisticaClimaPainel);

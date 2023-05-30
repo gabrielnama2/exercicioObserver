@@ -12,6 +12,7 @@ import ufes.adapter.Log;
 import ufes.model.DadoClima;
 import ufes.view.ConfiguracaoSistemaView;
 import ufes.view.EstacaoClimaticaView;
+import ufes.view.JanelaErroView;
 
 public class EstacaoClimaticaPrincipalPresenter {
     private EstacaoClimaticaView estacaoClimaticaView;
@@ -19,6 +20,7 @@ public class EstacaoClimaticaPrincipalPresenter {
     private ArrayList<DadoClima> dadosClima;
     private Log log;
     private ConfiguracaoSistemaView telaLog;
+    private JanelaErroView janelaErro;
 
     private int linhaSelecionada_Registros; // linha selecionada na tabela de registros
     
@@ -37,11 +39,12 @@ public class EstacaoClimaticaPrincipalPresenter {
             }
         });
 
-        //Listener para o botão salvar na tela de Log
+        /*Listener para o botão salvar na tela de Log*/
         telaLog.getjButtonSalvar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                log = new Log((String) telaLog.getjComboBoxOpcoesLog().getSelectedItem());
+                System.out.println("LOG: " + telaLog.getjComboBoxOpcoesLog().getSelectedItem());    //Opção selecionada na tela de log
+                //Chama a classe que realiza o log passando a opção selecionada
                 telaLog.setVisible(false);
             }
         });
@@ -71,6 +74,7 @@ public class EstacaoClimaticaPrincipalPresenter {
                 removerDadoClima();
             }
         });
+        
     }
     
     // action para quado o usuário clica em "incluir" clima
@@ -149,9 +153,19 @@ public class EstacaoClimaticaPrincipalPresenter {
     }
     
     /*Operações internas*/
-    public void atualizarMedicoes(){
-        atualizaTabelaRegistros();
-        notificarPaineis();
+    private void atualizarMedicoes(){
+        //dadosClima.clear();
+        if (dadosClima.isEmpty()) {
+            String mensagem = "Nenhum dado climático disponível.";
+            janelaErro.exibirMensagemErro(mensagem);
+            throw new RuntimeException(mensagem);
+        }
+        try{
+            notificarPaineis();
+        }
+        catch (RuntimeException e) {
+            System.out.println("Ocorreu um erro: " + e.getMessage());
+        }
     }
     
     private void notificarPaineis(){

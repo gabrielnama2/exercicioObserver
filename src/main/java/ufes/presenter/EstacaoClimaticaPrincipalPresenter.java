@@ -8,15 +8,17 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import ufes.adapter.Log;
 import ufes.model.DadoClima;
 import ufes.view.ConfiguracaoSistemaView;
 import ufes.view.EstacaoClimaticaView;
 
 public class EstacaoClimaticaPrincipalPresenter {
     private EstacaoClimaticaView estacaoClimaticaView;
-    private ConfiguracaoSistemaView telaLog;
     private ArrayList<IPainel> paineis;
     private ArrayList<DadoClima> dadosClima;
+    private Log log;
+    private ConfiguracaoSistemaView telaLog;
 
     private int linhaSelecionada_Registros; // linha selecionada na tabela de registros
     
@@ -25,8 +27,7 @@ public class EstacaoClimaticaPrincipalPresenter {
         telaLog = new ConfiguracaoSistemaView();
         paineis = new ArrayList();
         dadosClima = new ArrayList();
-        
-        
+        log = new Log("JSON");
         
         //Listener para a tela de Log
         estacaoClimaticaView.getjMenuLog().addActionListener(new ActionListener() {
@@ -40,8 +41,7 @@ public class EstacaoClimaticaPrincipalPresenter {
         telaLog.getjButtonSalvar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("LOG: " + telaLog.getjComboBoxOpcoesLog().getSelectedItem());    //Opção selecionada na tela de log
-                //Chama a classe que realiza o log passando a opção selecionada
+                log = new Log((String) telaLog.getjComboBoxOpcoesLog().getSelectedItem());
                 telaLog.setVisible(false);
             }
         });
@@ -80,13 +80,11 @@ public class EstacaoClimaticaPrincipalPresenter {
             double temperatura = Double.parseDouble(estacaoClimaticaView.getjTextPaneTemperaturaIncluir().getText());
             double umidade = Double.parseDouble(estacaoClimaticaView.getjTextPaneUmidade().getText());
             double pressao = Double.parseDouble(estacaoClimaticaView.getjTextPanePressao().getText());
-
             // pegando a data e colocando no formato LocalDate
             String Data = estacaoClimaticaView.getjTextPaneData().getText();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate data = LocalDate.parse(Data, formatter);
             // incluindo dados do clima
-
             DadoClima novoClima = new DadoClima(temperatura, umidade, pressao, data);
             System.out.println("NOVO DADO: " + novoClima);
             incluirDadoClima(novoClima);
@@ -138,12 +136,14 @@ public class EstacaoClimaticaPrincipalPresenter {
     
     /*Operações com os dados de clima*/
     public void incluirDadoClima(DadoClima dadoClima){
+        log.getLog().escrever("Incluir", dadoClima.toString());
         dadosClima.add(dadoClima);
         atualizarMedicoes();
     }
     
     // clicou em remover dados
     public void removerDadoClima(){
+        log.getLog().escrever("Remover", dadosClima.get(linhaSelecionada_Registros).toString());
         dadosClima.remove(linhaSelecionada_Registros);
         atualizarMedicoes();
     }

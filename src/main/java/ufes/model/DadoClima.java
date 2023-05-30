@@ -29,4 +29,9 @@ public class DadoClima {
     public LocalDate getData() {
         return data;
     }
+    
+    @Override
+    public String toString() {
+        return "Temperatura: " + Double.toString(this.getTemperatura()) + ", Umidade: " + Double.toString(this.getUmidade()) + ", Pressao: " + Double.toString(this.getPressao()) + ", Data: " + this.getData().toString();
+    }
 }

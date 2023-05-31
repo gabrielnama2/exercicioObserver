@@ -87,7 +87,7 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         // Remova qualquer ChartPanel existente
         jPanelGraficoMaxMin.removeAll();
 
-        JFreeChart chart = ChartFactory.createBarChart("Gráfico de Máximas e Mínimas", "Tipo do dado", "Valor", dataset, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart chart = ChartFactory.createBarChart("Gráfico de Máximas e Mínimas", "Tipo de dado", "Valor", dataset, PlotOrientation.VERTICAL, true, true, false);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(532, 435)); // Define as dimensões desejadas (largura x altura)
 
@@ -100,6 +100,67 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         // Atualize o painel
         jPanelGraficoMaxMin.revalidate();
         jPanelGraficoMaxMin.repaint();
+    }
+    
+    public JMenuItem getjMenuLog() {
+        return jMenuLog;
+    }
+    
+    public JTable getjTableRegistros() {
+        return jTableRegistros;
+    }
+    
+    public JButton getjButtonRemoverDados() {
+        return jButtonRemoverDados;
+    }
+
+    public void limparFormularioIncluir(){
+        //Formulário incluir
+        jTextPaneTemperaturaIncluir1.setText("");
+        jTextPaneUmidade1.setText("");
+        jTextPanePressao1.setText("");
+        jTextPaneData1.setText("");
+    }
+
+    // REGISTROS
+    private void mudaEstiloTabela() {
+        // cor do cabeçalho
+        JTableHeader header = this.getjTableRegistros().getTableHeader();
+        header.setBackground(Color.black);
+        header.setForeground(Color.white);
+        
+        // alinhamento do cabeçalho
+        ((DefaultTableCellRenderer)this.getjTableRegistros().getTableHeader()
+                .getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
+        
+        // alinhando as células
+        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+        leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+        this.getjTableRegistros().getColumnModel().getColumn(0).setCellRenderer(leftRenderer);
+        this.getjTableRegistros().getColumnModel().getColumn(1).setCellRenderer(leftRenderer);
+        this.getjTableRegistros().getColumnModel().getColumn(2).setCellRenderer(leftRenderer);
+        this.getjTableRegistros().getColumnModel().getColumn(3).setCellRenderer(leftRenderer);
+    }
+    
+    // GETS
+    public JButton getjButtonIncluirDadosDoTempo() {
+        return jButtonIncluirDadosDoTempo1;
+    }
+
+    public JTextPane getjTextPaneData() {
+        return jTextPaneData1;
+    }
+
+    public JTextPane getjTextPanePressao() {
+        return jTextPanePressao1;
+    }
+
+    public JTextPane getjTextPaneTemperaturaIncluir() {
+        return jTextPaneTemperaturaIncluir1;
+    }
+
+    public JTextPane getjTextPaneUmidade() {
+        return jTextPaneUmidade1;
     }
     
     @SuppressWarnings("unchecked")
@@ -567,11 +628,11 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         jDesktopPaneLayout.setHorizontalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPaneLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jInternalFrameIncluir2)
                     .addComponent(jInternalFrameIncluir1))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jInternalFrameUltimaAtualizacaoClima)
                     .addComponent(jInternalFrameDadosMediaClima))
@@ -585,7 +646,7 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
                     .addGroup(jDesktopPaneLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jInternalFrameGraficoMaxMinDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(19, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jDesktopPaneLayout.setVerticalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -601,7 +662,7 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
                             .addComponent(jInternalFrameIncluir1)
                             .addComponent(jInternalFrameDadosMediaClima)))
                     .addComponent(jInternalFrameGraficoMaxMinDados))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtqtdRegistros)
                     .addComponent(jLabelqtdRegistros))
@@ -609,8 +670,10 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         );
 
         jMenu.setText("Configurar");
+        jMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        jMenuLog.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuLog.setText("Log");
         jMenuLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -650,66 +713,6 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonIncluirDadosDoTempo1ActionPerformed
 
-    public JMenuItem getjMenuLog() {
-        return jMenuLog;
-    }
-
-    // REGISTROS
-    public JTable getjTableRegistros() {
-        return jTableRegistros;
-    }
-    
-    private void mudaEstiloTabela() {
-        // cor do cabeçalho
-        JTableHeader header = this.getjTableRegistros().getTableHeader();
-        header.setBackground(Color.black);
-        header.setForeground(Color.white);
-        
-        // alinhamento do cabeçalho
-        ((DefaultTableCellRenderer)this.getjTableRegistros().getTableHeader()
-                .getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
-        
-        // alinhando as células
-        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
-        leftRenderer.setHorizontalAlignment(JLabel.LEFT);
-        this.getjTableRegistros().getColumnModel().getColumn(0).setCellRenderer(leftRenderer);
-        this.getjTableRegistros().getColumnModel().getColumn(1).setCellRenderer(leftRenderer);
-        this.getjTableRegistros().getColumnModel().getColumn(2).setCellRenderer(leftRenderer);
-        this.getjTableRegistros().getColumnModel().getColumn(3).setCellRenderer(leftRenderer);
-    }
-    
-    public JButton getjButtonRemoverDados() {
-        return jButtonRemoverDados;
-    }
-    
-    // FIM DO REGISTROS
-
-
-    
-
-    // INCLUIR
-    public JButton getjButtonIncluirDadosDoTempo() {
-        return jButtonIncluirDadosDoTempo1;
-    }
-
-    public JTextPane getjTextPaneData() {
-        return jTextPaneData1;
-    }
-
-    public JTextPane getjTextPanePressao() {
-        return jTextPanePressao1;
-    }
-
-    public JTextPane getjTextPaneTemperaturaIncluir() {
-        return jTextPaneTemperaturaIncluir1;
-    }
-
-    public JTextPane getjTextPaneUmidade() {
-        return jTextPaneUmidade1;
-    }
-    // INCLUIR
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonIncluirDadosDoTempo1;
     private javax.swing.JButton jButtonRemoverDados;

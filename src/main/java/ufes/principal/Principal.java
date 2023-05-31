@@ -19,7 +19,7 @@ public class Principal {
         estacaoClimatica.registrarPainel(estatisticaClimaPainel);
         estacaoClimatica.registrarPainel(maximaMinimasPainel);
         
-        /*estacaoClimatica.incluirDadoClima(new DadoClima(25.5f, 35f, 53.1f, LocalDate.of(2023, 5, 15)));
+        estacaoClimatica.incluirDadoClima(new DadoClima(25.5f, 35f, 53.1f, LocalDate.of(2023, 5, 15)));
         estacaoClimatica.incluirDadoClima(new DadoClima(26.0f, 38f, 52.5f, LocalDate.of(2023, 5, 16)));
         estacaoClimatica.incluirDadoClima(new DadoClima(27.3f, 30f, 52.8f, LocalDate.of(2023, 5, 17)));
         estacaoClimatica.incluirDadoClima(new DadoClima(25.8f, 33f, 54.2f, LocalDate.of(2023, 5, 18)));
@@ -29,6 +29,5 @@ public class Principal {
         estacaoClimatica.incluirDadoClima(new DadoClima(25.6f, 46f, 43.8f, LocalDate.of(2023, 5, 22)));
         estacaoClimatica.incluirDadoClima(new DadoClima(27.1f, 41f, 42.3f, LocalDate.of(2023, 5, 23)));
         estacaoClimatica.incluirDadoClima(new DadoClima(24.0f, 40f, 45.5f, LocalDate.now()));
-        */
     }
 }

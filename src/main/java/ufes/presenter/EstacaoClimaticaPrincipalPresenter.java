@@ -98,7 +98,7 @@ public class EstacaoClimaticaPrincipalPresenter {
             // Incluindo dados do clima
             DadoClima novoClima = new DadoClima(temperatura, umidade, pressao, data);
             incluirDadoClima(novoClima);
-            
+            estacaoClimaticaView.limparFormularioIncluir();
         } 
         catch (NumberFormatException e) {
             System.out.println("Erro ao converter um valor numérico: " + e);

@@ -102,6 +102,67 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         jPanelGraficoMaxMin.repaint();
     }
     
+    public JMenuItem getjMenuLog() {
+        return jMenuLog;
+    }
+    
+    public JTable getjTableRegistros() {
+        return jTableRegistros;
+    }
+    
+    public JButton getjButtonRemoverDados() {
+        return jButtonRemoverDados;
+    }
+
+    public void limparFormularioIncluir(){
+        //Formulário incluir
+        jTextPaneTemperaturaIncluir1.setText("");
+        jTextPaneUmidade1.setText("");
+        jTextPanePressao1.setText("");
+        jTextPaneData1.setText("");
+    }
+
+    // REGISTROS
+    private void mudaEstiloTabela() {
+        // cor do cabeçalho
+        JTableHeader header = this.getjTableRegistros().getTableHeader();
+        header.setBackground(Color.black);
+        header.setForeground(Color.white);
+        
+        // alinhamento do cabeçalho
+        ((DefaultTableCellRenderer)this.getjTableRegistros().getTableHeader()
+                .getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
+        
+        // alinhando as células
+        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+        leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+        this.getjTableRegistros().getColumnModel().getColumn(0).setCellRenderer(leftRenderer);
+        this.getjTableRegistros().getColumnModel().getColumn(1).setCellRenderer(leftRenderer);
+        this.getjTableRegistros().getColumnModel().getColumn(2).setCellRenderer(leftRenderer);
+        this.getjTableRegistros().getColumnModel().getColumn(3).setCellRenderer(leftRenderer);
+    }
+    
+    // GETS
+    public JButton getjButtonIncluirDadosDoTempo() {
+        return jButtonIncluirDadosDoTempo1;
+    }
+
+    public JTextPane getjTextPaneData() {
+        return jTextPaneData1;
+    }
+
+    public JTextPane getjTextPanePressao() {
+        return jTextPanePressao1;
+    }
+
+    public JTextPane getjTextPaneTemperaturaIncluir() {
+        return jTextPaneTemperaturaIncluir1;
+    }
+
+    public JTextPane getjTextPaneUmidade() {
+        return jTextPaneUmidade1;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -652,72 +713,6 @@ public class EstacaoClimaticaView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonIncluirDadosDoTempo1ActionPerformed
 
-    public JMenuItem getjMenuLog() {
-        return jMenuLog;
-    }
-
-    // REGISTROS
-    public JTable getjTableRegistros() {
-        return jTableRegistros;
-    }
-    
-    private void mudaEstiloTabela() {
-        // cor do cabeçalho
-        JTableHeader header = this.getjTableRegistros().getTableHeader();
-        header.setBackground(Color.black);
-        header.setForeground(Color.white);
-        
-        // alinhamento do cabeçalho
-        ((DefaultTableCellRenderer)this.getjTableRegistros().getTableHeader()
-                .getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
-        
-        // alinhando as células
-        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
-        leftRenderer.setHorizontalAlignment(JLabel.LEFT);
-        this.getjTableRegistros().getColumnModel().getColumn(0).setCellRenderer(leftRenderer);
-        this.getjTableRegistros().getColumnModel().getColumn(1).setCellRenderer(leftRenderer);
-        this.getjTableRegistros().getColumnModel().getColumn(2).setCellRenderer(leftRenderer);
-        this.getjTableRegistros().getColumnModel().getColumn(3).setCellRenderer(leftRenderer);
-    }
-    
-    public JButton getjButtonRemoverDados() {
-        return jButtonRemoverDados;
-    }
-    
-    // FIM DO REGISTROS
-
-
-    public void limparFormularioIncluir(){
-        //Formulário incluir
-        jTextPaneTemperaturaIncluir1.setText("");
-        jTextPaneUmidade1.setText("");
-        jTextPanePressao1.setText("");
-        jTextPaneData1.setText("");
-    }
-
-    // INCLUIR
-    public JButton getjButtonIncluirDadosDoTempo() {
-        return jButtonIncluirDadosDoTempo1;
-    }
-
-    public JTextPane getjTextPaneData() {
-        return jTextPaneData1;
-    }
-
-    public JTextPane getjTextPanePressao() {
-        return jTextPanePressao1;
-    }
-
-    public JTextPane getjTextPaneTemperaturaIncluir() {
-        return jTextPaneTemperaturaIncluir1;
-    }
-
-    public JTextPane getjTextPaneUmidade() {
-        return jTextPaneUmidade1;
-    }
-    // INCLUIR
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonIncluirDadosDoTempo1;
     private javax.swing.JButton jButtonRemoverDados;

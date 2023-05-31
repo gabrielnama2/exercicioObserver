@@ -33,7 +33,7 @@ public class LogJSON implements ILog {
 
         // escreve o log
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path + file, true))) {
-            if (isFileEmpty(path + file)) {
+            if (arquivoVazio(path + file)) {
                 writer.write("[");
             } else {
                 writer.write(",");
@@ -47,7 +47,7 @@ public class LogJSON implements ILog {
         }
     }
 
-    private boolean isFileEmpty(String filePath) throws IOException {
+    private boolean arquivoVazio(String filePath) throws IOException {
         File file = new File(filePath);
         return file.length() == 0;
     }
